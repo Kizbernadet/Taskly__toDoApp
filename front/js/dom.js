@@ -139,4 +139,117 @@ task__container.addEventListener("click", (event) => {
 })
 
 
-/* ==== GESTION DES EVENEMENTS ==== */
+// --- Gestion du formulaire d'ajout de tâche (extraction du script HTML) ---
+
+// Met la date d'aujourd'hui par défaut dans le champ date
+export function setDefaultTaskDate() {
+    const dateInput = document.getElementById('taskDate');
+    if (dateInput) dateInput.valueAsDate = new Date();
+}
+
+// Ferme la modale du formulaire
+export function setupCloseTaskForm() {
+    const closeBtn = document.getElementById('close-taskForm');
+    const container = document.getElementById('addTaskContainer');
+    if (closeBtn && container) {
+        closeBtn.addEventListener('click', () => {
+            container.style.display = 'none';
+        });
+    }
+}
+
+// Bouton d'annulation
+export function setupCancelTaskBtn() {
+    const cancelBtn = document.getElementById('cancelTaskBtn');
+    const container = document.getElementById('addTaskContainer');
+    if (cancelBtn && container) {
+        cancelBtn.addEventListener('click', () => {
+            container.style.display = 'none';
+        });
+    }
+}
+
+// Ajout dynamique de catégorie
+export function setupAddCategoryBtn() {
+    const addBtn = document.getElementById('addCategoryBtn');
+    const select = document.getElementById('taskCategory');
+    if (addBtn && select) {
+        addBtn.addEventListener('click', () => {
+            const newCategory = prompt("Entrez le nom de la nouvelle catégorie:");
+            if (newCategory) {
+                const option = document.createElement('option');
+                option.value = newCategory.toLowerCase().replace(/\s+/g, '-');
+                option.textContent = newCategory;
+                select.appendChild(option);
+                select.value = option.value;
+                updateCategoryDisplay();
+            }
+        });
+    }
+}
+
+// Indicateur de priorité
+export function setupPriorityIndicator() {
+    const select = document.getElementById('taskPriority');
+    const indicator = document.getElementById('priority-indicator');
+    const text = document.getElementById('priority-text');
+    const dot = document.getElementById('priority-dot');
+    if (select && indicator && text && dot) {
+        select.addEventListener('change', function() {
+            if (this.value) {
+                indicator.classList.remove('hidden');
+                switch(this.value) {
+                    case 'low':
+                        text.textContent = 'Priorité faible';
+                        dot.style.backgroundColor = '#10b981';
+                        break;
+                    case 'medium':
+                        text.textContent = 'Priorité moyenne';
+                        dot.style.backgroundColor = '#f59e0b';
+                        break;
+                    case 'high':
+                        text.textContent = 'Priorité haute';
+                        dot.style.backgroundColor = '#ef4444';
+                        break;
+                }
+            } else {
+                indicator.classList.add('hidden');
+            }
+        });
+    }
+}
+
+// Affichage de la catégorie sélectionnée
+export function updateCategoryDisplay() {
+    const categorySelect = document.getElementById('taskCategory');
+    const displayArea = document.getElementById('selected-category-display');
+    if (categorySelect && displayArea) {
+        if (categorySelect.value) {
+            const categoryName = categorySelect.options[categorySelect.selectedIndex].text;
+            displayArea.innerHTML = `<div class="selected-category category-${categorySelect.value}">
+                <i class="fas fa-tag"></i>
+                Catégorie: ${categoryName}
+            </div>`;
+        } else {
+            displayArea.innerHTML = '';
+        }
+    }
+}
+
+export function setupCategoryDisplayListener() {
+    const categorySelect = document.getElementById('taskCategory');
+    if (categorySelect) {
+        categorySelect.addEventListener('change', updateCategoryDisplay);
+    }
+}
+
+// Initialisation globale du formulaire d'ajout de tâche
+export function initTaskFormFeatures() {
+    setDefaultTaskDate();
+    setupCloseTaskForm();
+    setupCancelTaskBtn();
+    setupAddCategoryBtn();
+    setupPriorityIndicator();
+    setupCategoryDisplayListener();
+    updateCategoryDisplay();
+}

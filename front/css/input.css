@@ -49,6 +49,13 @@
     }
 
     /* === Form Class Utilities === */
+    .form__header{
+        @apply w-full h-20 flex justify-between items-center rounded-tl-xl rounded-tr-xl px-2;
+        @apply border-b-2 border-red-500;
+        /* background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); */
+        color: white;
+        padding: 20px 24px;
+    }
     .form__items{
         @apply w-full h-12 flex justify-center items-center p-1;
     }

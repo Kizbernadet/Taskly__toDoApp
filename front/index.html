@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        ToDo
-    </title>
+    <title>Taskly - ToDoList</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/output.css">
 </head>
@@ -42,38 +40,21 @@
                     Nouvelle tâche
                 </button>
                 <div id="addTaskContainer" class="absolute-center bg-transparent w-full h-full backdrop-contrast-50 flex-centered">
-                    <div id="formContainer" class="bg-white rounded-xl w-1/2 h-10/12 p-4">
-                        <div class="w-full h-1/12 flex justify-between items-center px-4 mb-2">
-                            <h2 class="font-content uppercase font-semibold text-black">Ajouter une nouvelle tâche</h2>
-                            <button id="close-taskForm" class="text-red-500 text-2xl cursor-pointer duration-300 transition-all ease-in-out hover:scale-150">
+                    <!-- Formulaire d'ajout de tâche, tout en un seul bloc clair -->
+                    <form class=" w-1/2 h-11/12 flex flex-col justify-start items-center gap-y-4 bg-white rounded-xl" action="post">
+                        <!-- En-tête du formulaire -->
+                        <div class="form__header">
+                            <div>
+                                <h2 class="text-xl font-bold">Ajouter une nouvelle tâche</h2>
+                                <p class="text-indigo-100 mt-1">Remplissez les détails de votre tâche</p>
+                            </div>
+                            <button id="close-taskForm" class="close-btn text-white text-xl cursor-pointer" type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
                             </button>
                         </div>
-                        <form class="flex justify-start items-center flex-col w-full h-11/12 gap-y-2" action="post">
-                            <div class="form__items">
-                                <input class="input__form" type="text" name="taskTitle" id="taskTitle" placeholder="Ecrivez le titre de la tâche">
-                            </div>
-                            <div class="form__items">
-                                <input class="input__form" type="text" name="taskDescription" id="taskDescription" placeholder="Ecrivez la description de votre tâche">
-                            </div>
-                            <div data-id="taskOptions" class="form__items gap-x-10">
-                                <div class="w-1/2 rounded-md px-2 py-1.5 flex justify-between">
-                                    <button class="text-black" type="button">Priorité de la tâche</button>
-                                </div>
-                                <div class="bg-blue-300 w-1/2 h-full rounded-md px-2 py-1.5 flex-centered">
-                                    second
-                                </div>
-                                <!-- <label for="taskPriority" class="w-30 p-2 h-4/5 text-black">Priorité</label>
-                                <select class="w-30 p-2 h-4/5 bg-pink-500" name="taskPriority" id="taskPriority">
-                                    <option value="low">faible</option>
-                                    <option value="medium">moyenne</option>
-                                    <option value="high">haute</option>
-                                </select> -->
-                            </div>
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
             <ul id="taskContainer" class="flex flex-col justify-start items-center w-full h-[380px] max-h-[380px] gap-y-2">
