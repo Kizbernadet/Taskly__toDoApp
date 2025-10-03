@@ -93,7 +93,11 @@
     }
 
     .dropdown__button:hover{
-        @apply;
+        @apply hidden;
+    }
+
+    .options__box{
+        @apply hidden;
     }
 
 }

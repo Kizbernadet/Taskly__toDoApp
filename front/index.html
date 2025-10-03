@@ -58,17 +58,19 @@
                             <div class="form__items">
                                 <input class="input__form" type="text" name="taskDescription" id="taskDescription" placeholder="Ecrivez la description de votre tâche">
                             </div>
-                            <div data-id="taskOptions" class="form__items gap-x-3 js">
-                                <button type="button" class="w-30 p-2 h-4/5 bg-pink-500 text-lg flex justify-between items-center rounded-md">
-                                    Priorité
-                                    <svg class="icon__style__commun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-                                    </svg>
-                                </button>
-                                <select name="taskPriority" id="taskPriority">
+                            <div data-id="taskOptions" class="form__items gap-x-3 bg-gray-500">
+                                <div class="bg-red-400">
+                                    first
+                                </div>
+                                <div class="bg-blue-300">
+                                    second
+                                </div>
+                                <!-- <label for="taskPriority" class="w-30 p-2 h-4/5 text-black">Priorité</label>
+                                <select class="w-30 p-2 h-4/5 bg-pink-500" name="taskPriority" id="taskPriority">
                                     <option value="low">faible</option>
                                     <option value="medium">moyenne</option>
-                                </select>
+                                    <option value="high">haute</option>
+                                </select> -->
                             </div>
                         </form>
                     </div>
