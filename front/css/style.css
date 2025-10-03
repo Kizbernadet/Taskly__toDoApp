@@ -1,0 +1,188 @@
+/* === IMPORTATION === */
+/* === IMPORTATION === */
+
+
+/* ==== RESET === */
+
+*{
+    margin: 0px;
+    outline: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+li{
+    list-style: none;
+}
+
+/* ==== RESET === */
+
+/* === BROWSER STYLE === */
+/* === BROWSER STYLE === */
+
+/* === UTILITIES === */
+.absolute-center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.flex-centered{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.classic-button{
+    text-transform: uppercase;
+    border: solid 1px transparent;
+    border-radius: 0.2rem;
+    transition: all ease-in-out 0.3s;
+    font-family: var(--secondary-font);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-black);
+    padding: 0.3rem;
+    cursor: pointer;
+}
+
+/* === UTILITIES === */
+
+:root{
+ /* === USABLES VARIABLES  === */
+
+    /* ==== FONTS & FONT-SIZES === */
+    --main-font : "Open sans", sans-serif;
+    --title-font: "Exo 2", "Montserrat", serif;
+    --secondary-font : "Calibri", "Arial", sans-serif;
+
+    /* === FONT SIZES === */
+
+
+    /* ==== COLORS === */
+    --bg-white : white;
+    --color-black: black;
+    --bg-gray: #737373;
+    --color-secondary: #FFC90E;
+    --color-succes: #5CC43D;
+
+    /* ==== WIDTHS & HEIGHTS === */
+
+    
+
+/* === USABLES VARIABLES  === */
+}
+
+
+/* ==== MAIN STYLE ==== */
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+    color: var(--bg-white);
+    font-family: var(--secondary-font);
+}
+
+.main-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    row-gap: 2%;
+    width: 100%;
+    height: 100%;
+}
+
+aside{
+    width: 30%;
+    height: 100%;
+    background-color: bisque;
+    border-radius: 20px;
+}
+
+#taskContainer{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    flex-grow: 1;
+    padding: 0px 0.5%;
+}
+
+#taskContainer #addTaskForm{
+    position: relative;
+    width: 100%;
+    height: 10%;
+    background-color: tomato;
+    border: solid transparent 2px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+#addTaskForm button{
+    width: 30%;
+    height: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#addTaskForm button:hover{
+    width: 50%;
+    font-size: 1.2rem;
+    color: var(--color-black);
+    font-weight: 700;
+    background-color: var(--color-secondary);
+}
+
+.allTaskContainer{
+    width: 100%;
+    flex-grow: 1;
+    background-color: aquamarine;
+    border: solid transparent 2px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 1%;
+}
+
+.allTaskContainer ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    column-gap: 1%;
+    background-color: tomato;
+}
+
+ul .taskItems{
+    width: 100%;
+    height: 10%;
+    background-color: red;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    row-gap: 10%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.taskItems .taskTitle{
+    width: 60%;
+    height: 100%;
+    background-color: whitesmoke;
+}
+
+
+
+/* ==== MAIN STYLE ==== */
+
+/* === RESPONSIVE DESIGN === */
+/* === RESPONSIVE DESIGN === */

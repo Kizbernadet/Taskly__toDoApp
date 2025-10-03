@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        ToDo
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/output.css">
+</head>
+<body class="bg-gray-950 w-screen h-screen p-4 text-white relative">
+   <main class="w-full h-full rounded-xl flex justify-between items-center flex-col" id="mainContainer">
+    <h1 class="w-full h-1/12 font-special flex justify-start items-center pl-6 uppercase text-3xl font-normal cursor-pointer">Taskly</h1>
+    <section class="w-full h-11/12 flex justify-start items-center gap-x-2">
+        <aside class="h-full w-1/4 bg-gray-800 rounded-xl p-5">
+            <div class="w-full h-max flex justify-between mb-2">
+                <h2 class="text-xl flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
+                    </svg>
+                    Filters
+                </h2>
+                <div class="activeFilter border-2 w-max px-2 py-1 flex items-center justify-center">
+                    <label for="filterState" class="cursor-pointer">Filtrer</label>
+                    <input type="checkbox" name="filter" id="filterState" value="false" class="bg-emerald-600">
+                </div>
+            </div>
+        </aside>
+        <div class="h-full w-3/4 bg-gray-800 rounded-xl p-5">
+            <div class="w-full h-max flex justify-between mb-2">
+                <h2 class="text-2xl flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
+                    </svg>
+                    Tasks
+                </h2>
+                <button id="addNewTask" class="bg-white text-black px-4 py-2 rounded-md cursor-pointer flex-centered classic-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    Nouvelle tâche
+                </button>
+                <div id="addTaskContainer" class="absolute-center bg-transparent w-full h-full backdrop-contrast-50 flex-centered">
+                    <div id="formContainer" class="bg-white rounded-xl w-1/2 h-10/12 p-4">
+                        <div class="w-full h-1/12 flex justify-between items-center px-4 mb-2">
+                            <h2 class="font-content uppercase font-semibold text-black">Ajouter une nouvelle tâche</h2>
+                            <button id="close-taskForm" class="text-red-500 text-2xl cursor-pointer duration-300 transition-all ease-in-out hover:scale-150">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <form class="flex justify-start items-center flex-col w-full h-11/12 gap-y-2" action="post">
+                            <div class="form__items">
+                                <input class="input__form" type="text" name="taskTitle" id="taskTitle" placeholder="Ecrivez le titre de la tâche">
+                            </div>
+                            <div class="form__items">
+                                <input class="input__form" type="text" name="taskDescription" id="taskDescription" placeholder="Ecrivez la description de votre tâche">
+                            </div>
+                            <div data-id="taskOptions" class="form__items gap-x-3 js">
+                                <button type="button" class="w-30 p-2 h-4/5 bg-pink-500 text-lg flex justify-between items-center rounded-md">
+                                    Priorité
+                                    <svg class="icon__style__commun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                    </svg>
+                                </button>
+                                <select name="taskPriority" id="taskPriority">
+                                    <option value="low">faible</option>
+                                    <option value="medium">moyenne</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <ul id="taskContainer" class="flex flex-col justify-start items-center w-full h-[380px] max-h-[380px] gap-y-2">
+            </ul>
+        </div>
+    </section>
+   </main>
+   <script type="module" src="js/main.js"></script> 
+</body>
+</html>

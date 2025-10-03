@@ -1,0 +1,109 @@
+/* === IMPORTATION === */
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Barriecito&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* === IMPORTATION === */
+
+/* ---- Font Importation ---- */
+@font-face {
+    font-family: "Open Sans";
+    src: url('/front/assets/fonts/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf');
+}
+
+@font-face {
+    font-family: "Barriecito";
+    src: url('/front/assets/fonts/Barriecito/Barriecito-Regular.ttf');
+}
+
+/* === THEME === */
+@theme{
+     /* ==== Additionnal fonts === */
+    --font-primary : "Montserrat", sans-serif;
+    --font-content : "Open Sans", sans-serif;
+    --font-title: "Exo 2", sans-serif;
+    --font-special : "Barriecito", system-ui;
+
+    /* === Colors === */
+}
+/* === THEME === */
+
+/* === UTILITIES === */
+@layer utilities{
+
+    .absolute-center{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .flex-centered{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .classic-button{
+        @apply text-base font-normal;
+        @apply transition-all duration-300 hover:scale-110 hover:bg-violet-800 hover:font-semibold hover:text-white;
+    }
+
+    /* === Form Class Utilities === */
+    .form__items{
+        @apply w-full h-12 flex justify-center items-center p-1;
+    }
+
+    .input__form{
+        @apply w-full h-full p-2 border-1 border-black text-black rounded-md;
+    }
+
+    .select__form{
+        @apply w-1/2 h-full p-2 border-1 border-black text-black rounded-md;
+    }
+
+    /*  ==== TASK CONTAINER STYLE ==== */
+    .task__style__li{
+        @apply w-full  h-10 bg-gray-500 flex items-center justify-between rounded-md text-base px-4;
+        @apply cursor-pointer hover:bg-violet-800 transition-all duration-500;
+    }
+
+    .task__style__p{
+        @apply flex justify-center items-center;
+        @apply flex-grow h-full capitalize;
+    }
+
+    .task__style__input{
+        @apply w-max bg-pink-500 h-full cursor-pointer;
+    }
+
+    .task__style__actions{
+        @apply w-2/12 flex justify-evenly items-center h-full;
+    }
+
+    .task__style__button{
+        @apply transition-all ease-in-out duration-300 hover:bg-red-600 w-8 h-8 rounded-sm;
+    }
+
+    .task__style__icon{
+        @apply transition-all ease-in-out duration-200 hover:rotate-45;
+    }
+
+    .icon__style__commun{
+        @apply w-6 h-6;
+    }
+
+    .dropdown__button:hover{
+        @apply;
+    }
+
+}
+
+/* === UTILITIES === */
+
+
+/* ==== MAIN STYLE ==== */
+
+/* ==== MAIN STYLE ==== */
+
+/* === RESPONSIVE DESIGN === */
+/* === RESPONSIVE DESIGN === */

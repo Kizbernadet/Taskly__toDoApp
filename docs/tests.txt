@@ -1,0 +1,97 @@
+Les tests sur les routes 
+
+Informations générales ====================== 
+
+Nom de l'API : ToDoList (module http)
+Base URL : http://localhost:3000
+Environnement : Local / Dev / Prod
+
+Structure d'un test ========================
+Route testée 
+GET / http://localhost:3000/tasks
+
+Objectifs : Cette requête doit récupérer toutes les informations des tâches dans la base de données
+
+Requête envoyé =============================
+Méthode : GET 
+URL Complète :  http://localhost:3000/tasks
+Content-Type : application/json
+
+
+Résultat attendu ===========================
+Status Code : 200
+Réponse JSON attendue : Le contenu complet de la table tasks
+
+Résultat obtenu ============================
+Le test est validé , le resultat obtenu correspond au résultat attendu
+
+
+============================================
+Route : GET /tasks
+
+Objectif : récupérer toutes les tâches.
+
+Requête :
+
+GET http://localhost:3000/tasks
+
+
+Attendu :
+
+Status : 200
+
+Body (exemple) :
+
+[
+  { "id": 1, "title": "Apprendre Node.js", "status": "pending" },
+  { "id": 2, "title": "Faire les courses", "status": "done" }
+]
+
+
+Obtenu :
+(ici tu notes ce que Postman renvoie réellement, ex: vide, erreur 500, etc.)
+
+Route : GET /tasks/1
+
+Objectif : récupérer une tâche précise par ID.
+
+Requête :
+
+GET http://localhost:3000/tasks/1
+
+
+Attendu :
+
+Status : 200
+
+Body :
+
+{ "id": 1, "title": "Apprendre Node.js", "status": "pending" }
+
+
+Obtenu :
+(résultat réel Postman)
+
+Route : GET /tasks?status=done
+
+Objectif : récupérer toutes les tâches terminées.
+
+Requête :
+
+GET http://localhost:3000/tasks?status=done
+
+
+Attendu :
+
+Status : 200
+
+Body :
+
+[
+  { "id": 2, "title": "Faire les courses", "status": "done" }
+]
+
+
+Obtenu :
+(résultat réel Postman)
+============================================
