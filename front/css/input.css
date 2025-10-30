@@ -1,5 +1,16 @@
 /* === IMPORTATION === */
+/*
+    - Directives Tailwind : injectent les layers de base/components/utilities.
+        Laisser ces lignes en haut du fichier source (input.css) pour que
+        le CLI Tailwind les traite correctement lors de la compilation.
+    - Les imports de polices (Google / locales) doivent venir après
+        les directives @tailwind si vous voulez éviter la duplication
+        dans le CSS généré.
+*/
+@tailwind utilities;
+/* Note: l'import suivant est conservé si tu veux charger Tailwind via @import (optionnel) */
 @import "tailwindcss";
+/* Import Google Fonts (facultatif si déjà défini dans output.css) */
 @import url('https://fonts.googleapis.com/css2?family=Barriecito&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 /* === IMPORTATION === */
@@ -7,7 +18,8 @@
 /* ---- Font Importation ---- */
 @font-face {
     font-family: "Open Sans";
-    src: url('/front/assets/fonts/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf');
+    /* Retirer l'antislash avant la virgule dans le nom de fichier (inutile et source d'erreur) */
+    src: url('/front/assets/fonts/Open_Sans/OpenSans-VariableFont_wdth,wght.ttf');
 }
 
 @font-face {
@@ -15,106 +27,191 @@
     src: url('/front/assets/fonts/Barriecito/Barriecito-Regular.ttf');
 }
 
-/* === THEME === */
-@theme{
-     /* ==== Additionnal fonts === */
-    --font-primary : "Montserrat", sans-serif;
-    --font-content : "Open Sans", sans-serif;
-    --font-title: "Exo 2", sans-serif;
-    --font-special : "Barriecito", system-ui;
+/* === THEME / VARIABLES GLOBALES === */
+/*
+    Déclaration des variables CSS globales utilisées par l'UI.
+    - Utiliser :root pour garantir la disponibilité dans tout le CSS
+    - Ces variables servent à conserver la cohérence des polices et couleurs
+        au sein des composants Tailwind que tu crées.
+*/
+:root{
+        /* ==== Polices additionnelles (utilisées dans le projet) === */
+        --font-primary : "Montserrat", sans-serif;
+        --font-content : "Open Sans", sans-serif;
+        --font-title: "Exo 2", sans-serif;
+        --font-special : "Barriecito", system-ui;
 
-    /* === Colors === */
+        /* === Couleurs / autres variables globales peuvent être ajoutées ici === */
 }
-/* === THEME === */
+/* === FIN THEME === */
 
-/* === UTILITIES === */
+/* === COMPONENTS === */
+/*
+  Bloc @layer components :
+  - Regroupe les composants réutilisables qui utilisent @apply (classes Tailwind)
+  - Placer ici les composants complexes (boutons, formulaires, cartes, tâches)
+*/
+@layer components{
+
+    /* === Boutons réutilisables === */
+    .classic-button{
+        /* applique des utilities Tailwind pour la transition et l'état hover */
+        @apply transition-all duration-300 hover:scale-110 hover:bg-violet-800 hover:font-semibold hover:text-white;
+    }
+
+    /* === Utilitaires de formulaire (composants) === */
+    .form__header{
+        /* en-tête de formulaire : largeur pleine, hauteur fixe, fond violet */
+        @apply flex items-center justify-between w-full h-20 px-2 rounded-tl-xl rounded-tr-xl;
+        @apply border-b-2 bg-violet-800;
+        color: white;
+        padding: 20px 24px;
+    }
+    /* Conteneurs d'items de formulaire (alignement et hauteur) */
+    .form__items{
+        @apply flex items-center justify-center w-full h-12 p-1;
+    }
+
+    /* Inputs et selects utilisés dans les formulaires */
+    .input__form{
+        @apply w-full h-full p-2 text-black border-black rounded-md border-1;
+    }
+
+    .select__form{
+        @apply w-1/2 h-full p-2 text-black border-black rounded-md border-1;
+    }
+
+    /* === Styles liés aux tâches (liste, item, priorités) === */
+    .task__style__li{
+        @apply flex items-center justify-between w-full h-16 px-2 bg-gray-600 rounded-lg;
+        @apply transition-all duration-300 border-l-4 cursor-pointer hover:bg-violet-700;
+        border-left-color: #6b7280; /* default accent */
+    }
+
+    /* accents selon priorité (classes à ajouter dynamiquement en JS) */
+    .task__style__li.priority-high { border-left-color: #ef4444; }
+    .task__style__li.priority-medium { border-left-color: #f59e0b; }
+    .task__style__li.priority-low { border-left-color: #10b981; }
+
+    /* État complété */
+    .task__style__li.completed { @apply bg-gray-700 opacity-60; text-decoration: line-through; }
+
+    /* Contenu textuel de la tâche (titre/description) */
+    .task__style__p{ @apply flex items-center justify-center; @apply flex-grow h-full pl-4 text-left capitalize; }
+
+    /* Checkbox/entrée d'état */
+    .task__style__input{
+        @apply w-5 h-5 bg-gray-700 border-2 border-gray-500 rounded cursor-pointer;
+        @apply focus:ring-2 focus:ring-violet-500 focus:border-violet-500;
+    }
+    .task__style__input:checked { @apply bg-violet-600 border-violet-600; }
+
+    /* Actions (édition / suppression) */
+    .task__style__actions{ @apply flex items-center justify-end gap-2; }
+    .task__style__button{ @apply w-8 h-8 transition-all duration-300 ease-in-out border-none hover:scale-120; }
+    .task__style__button.edit { @apply hover:bg-blue-600; }
+    .task__style__button.delete { @apply hover:bg-red-600; }
+
+    .task__style__icon{ @apply transition-all duration-200 ease-in-out; }
+    .icon__style__commun{ @apply w-4 h-4; }
+
+    /* Meta (date, catégorie, badge) */
+    .task-meta { @apply flex items-center gap-4 text-sm text-gray-300; }
+    .task-category { @apply px-2 py-1 text-xs font-medium rounded-full; }
+    .category-work { @apply text-white bg-blue-500; }
+    .category-personal { @apply text-white bg-green-500; }
+    .category-shopping { @apply text-black bg-yellow-500; }
+    .category-health { @apply text-white bg-red-500; }
+
+    .task-date { @apply flex items-center gap-1; }
+    .task-priority { @apply px-2 py-1 text-xs font-medium rounded-full; }
+
+    /* Badges de priorité (couleurs persistantes) */
+    /* .priority-high { background-color: #ef4444; color: white; }
+    .priority-medium { background-color: #f59e0b; color: black; }
+    .priority-low { background-color: #10b981; color: white; } */
+
+    /* Etats et utilitaires supplémentaires */
+    .filters-active #filtersContent { @apply opacity-100 pointer-events-auto; }
+    .task-placeholder { @apply flex flex-col items-center justify-center h-full; }
+    .dropdown__button:hover { @apply hidden; }
+    .options__box{ @apply hidden; }
+
+}
+
+/* === UTILITIES (petites classes utilitaires) === */
 @layer utilities{
-
     .absolute-center{
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
     }
-
-    .flex-centered{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .classic-button{
-        @apply text-base font-normal;
-        @apply transition-all duration-300 hover:scale-110 hover:bg-violet-800 hover:font-semibold hover:text-white;
-    }
-
-    /* === Form Class Utilities === */
-    .form__header{
-        @apply w-full h-20 flex justify-between items-center rounded-tl-xl rounded-tr-xl px-2;
-        @apply border-b-2 border-red-500;
-        /* background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); */
-        color: white;
-        padding: 20px 24px;
-    }
-    .form__items{
-        @apply w-full h-12 flex justify-center items-center p-1;
-    }
-
-    .input__form{
-        @apply w-full h-full p-2 border-1 border-black text-black rounded-md;
-    }
-
-    .select__form{
-        @apply w-1/2 h-full p-2 border-1 border-black text-black rounded-md;
-    }
-
-    /*  ==== TASK CONTAINER STYLE ==== */
-    .task__style__li{
-        @apply w-full  h-10 bg-gray-500 flex items-center justify-between rounded-md text-base px-4;
-        @apply cursor-pointer hover:bg-violet-800 transition-all duration-500;
-    }
-
-    .task__style__p{
-        @apply flex justify-center items-center;
-        @apply flex-grow h-full capitalize;
-    }
-
-    .task__style__input{
-        @apply w-max bg-pink-500 h-full cursor-pointer;
-    }
-
-    .task__style__actions{
-        @apply w-2/12 flex justify-evenly items-center h-full;
-    }
-
-    .task__style__button{
-        @apply transition-all ease-in-out duration-300 hover:bg-red-600 w-8 h-8 rounded-sm;
-    }
-
-    .task__style__icon{
-        @apply transition-all ease-in-out duration-200 hover:rotate-45;
-    }
-
-    .icon__style__commun{
-        @apply w-6 h-6;
-    }
-
-    .dropdown__button:hover{
-        @apply hidden;
-    }
-
-    .options__box{
-        @apply hidden;
-    }
-
 }
 
-/* === UTILITIES === */
-
-
 /* ==== MAIN STYLE ==== */
+body {
+    font-family: var(--font-primary);
+}
 
+h1 {
+    font-family: var(--font-special);
+}
+
+.task-checkbox:checked + .task-content {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/* Animation pour l'apparition des tâches */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.task__style__li {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #374151;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
 /* ==== MAIN STYLE ==== */
 
 /* === RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+    .task-meta {
+        @apply flex-col items-start gap-1;
+    }
+    
+    .task__style__actions {
+        @apply flex-col gap-1;
+    }
+    
+    .task__style__li {
+        @apply h-auto py-1;
+        /* @apply bg-emerald-500; */
+    }
+}
 /* === RESPONSIVE DESIGN === */

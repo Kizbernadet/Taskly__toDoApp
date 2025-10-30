@@ -3,65 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taskly - ToDoList</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Taskly - Gestionnaire de Tâches</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/output.css">
 </head>
-<body class="bg-gray-950 w-screen h-screen p-4 text-white relative">
-   <main class="w-full h-full rounded-xl flex justify-between items-center flex-col" id="mainContainer">
-    <h1 class="w-full h-1/12 font-special flex justify-start items-center pl-6 uppercase text-3xl font-normal cursor-pointer">Taskly</h1>
-    <section class="w-full h-11/12 flex justify-start items-center gap-x-2">
-        <aside class="h-full w-1/4 bg-gray-800 rounded-xl p-5">
-            <div class="w-full h-max flex justify-between mb-2">
-                <h2 class="text-xl flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
-                    </svg>
-                    Filters
+<body class="bg-gray-950 min-h-screen px-4 text-white overflow-x-hidden">
+   <main class="max-w-7xl mx-auto h-screen rounded-xl flex flex-col" id="mainContainer">
+    <!-- Header -->
+    <header class="w-full py-2 mt-2 flex justify-between items-center">
+        <h1 class="font-special uppercase text-3xl font-normal cursor-pointer text-center text-violet-400 drop-shadow-lg">
+            <i class="fas fa-tasks mr-3"></i>Taskly
+        </h1>
+    </header>
+
+    <!-- Main Content -->
+    <section class="flex flex-1 flex-col lg:flex-row gap-4 pb-2">
+        <!-- Sidebar Filters -->
+        <aside class="hidden lg:w-1/5 bg-gray-800 rounded-xl p-6 shadow-lg">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold flex items-center gap-2">
+                    <i class="fas fa-filter text-violet-400"></i>
+                    Filtres
                 </h2>
-                <div class="activeFilter border-2 w-max px-2 py-1 flex items-center justify-center">
-                    <label for="filterState" class="cursor-pointer">Filtrer</label>
-                    <input type="checkbox" name="filter" id="filterState" value="false" class="bg-emerald-600">
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="filterState" class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-700 peer-focus:ring-2 peer-focus:ring-violet-500 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-violet-600"></div>
+                </label>
+            </div>
+
+            <!-- Filtres détaillés -->
+            <div id="filtersContent" class="space-y-4 opacity-50 pointer-events-none transition-all duration-300">
+                <div class="filter-group">
+                    <h3 class="text-sm font-medium text-gray-300 mb-2">Statut</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="rounded text-violet-500 filter-checkbox" data-filter="all" checked> Toutes
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="rounded text-violet-500 filter-checkbox" data-filter="pending"> À faire
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="rounded text-violet-500 filter-checkbox" data-filter="completed"> Terminées
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3 class="text-sm font-medium text-gray-300 mb-2">Priorité</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="rounded text-violet-500 priority-checkbox" data-priority="all" checked> Toutes
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="rounded text-violet-500 priority-checkbox" data-priority="high"> Haute
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="rounded text-violet-500 priority-checkbox" data-priority="medium"> Moyenne
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="rounded text-violet-500 priority-checkbox" data-priority="low"> Basse
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3 class="text-sm font-medium text-gray-300 mb-2">Catégorie</h3>
+                    <select id="categoryFilter" class="w-full bg-gray-700 rounded-lg px-3 py-2 text-white border border-gray-600 focus:border-violet-500 focus:ring-1 focus:ring-violet-500">
+                        <option value="all">Toutes les catégories</option>
+                        <option value="work">Travail</option>
+                        <option value="personal">Personnel</option>
+                        <option value="shopping">Courses</option>
+                        <option value="health">Santé</option>
+                    </select>
                 </div>
             </div>
         </aside>
-        <div class="h-full w-3/4 bg-gray-800 rounded-xl p-5">
-            <div class="w-full h-max flex justify-between mb-2">
-                <h2 class="text-2xl flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
-                    </svg>
-                    Tasks
+
+        <!-- Main Tasks Area -->
+        <div class="lg:flex-1 bg-gray-800 rounded-xl p-4 shadow-lg">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-semibold flex items-center gap-2">
+                    <i class="fas fa-clipboard-list text-violet-400"></i>
+                    Mes Tâches
                 </h2>
-                <button id="addNewTask" class="bg-white text-black px-4 py-2 rounded-md cursor-pointer flex-centered classic-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
+                <button id="addNewTask" class="bg-violet-600 hover:bg-violet-700 text-white px-6 py-3 rounded-lg cursor-pointer flex items-center gap-2 transition-all duration-300 hover:scale-105 font-medium">
+                    <i class="fas fa-plus"></i>
                     Nouvelle tâche
                 </button>
-                <div id="addTaskContainer" class="absolute-center bg-transparent w-full h-full backdrop-contrast-50 flex-centered">
-                    <!-- Formulaire d'ajout de tâche, tout en un seul bloc clair -->
-                    <form class=" w-1/2 h-11/12 flex flex-col justify-start items-center gap-y-4 bg-white rounded-xl" action="post">
-                        <!-- En-tête du formulaire -->
-                        <div class="form__header">
-                            <div>
-                                <h2 class="text-xl font-bold">Ajouter une nouvelle tâche</h2>
-                                <p class="text-indigo-100 mt-1">Remplissez les détails de votre tâche</p>
-                            </div>
-                            <button id="close-taskForm" class="close-btn text-white text-xl cursor-pointer" type="button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </form>
+            </div>
+
+            <!-- Stats -->
+            <div class="flex justify-evenly items-center gap-4 mb-2 w-full h-max">
+                <div class="bg-gray-700 rounded-lg p-2 w-30 text-center">
+                    <div id="totalTasks" class="text-2xl font-bold text-violet-400">0</div>
+                    <div class="text-sm text-gray-300">Total</div>
+                </div>
+                <div class="bg-gray-700 rounded-lg p-2 w-30 text-center">
+                    <div id="pendingTasks" class="text-2xl font-bold text-yellow-400">0</div>
+                    <div class="text-sm text-gray-300">En cours</div>
+                </div>
+                <div class="bg-gray-700 rounded-lg p-2 w-30 text-center">
+                    <div id="completedTasks" class="text-2xl font-bold text-green-400">0</div>
+                    <div class="text-sm text-gray-300">Terminées</div>
                 </div>
             </div>
-            <ul id="taskContainer" class="flex flex-col justify-start items-center w-full h-[380px] max-h-[380px] gap-y-2">
-            </ul>
+
+            <!-- Tasks List -->
+            <div class="rounded-lg p-4 h-96 overflow-y-auto">
+                <ul id="taskContainer" class="space-y-3">
+                    <!-- Les tâches seront ajoutées dynamiquement ici -->
+                    <li class="task-placeholder text-gray-400 text-center py-8">
+                        <i class="fas fa-clipboard text-4xl mb-2"></i>
+                        <p>Aucune tâche pour le moment</p>
+                        <p class="text-sm">Cliquez sur "Nouvelle tâche" pour commencer</p>
+                    </li>
+                </ul>
+            </div>
         </div>
     </section>
    </main>
+
+   <!-- Modal d'ajout de tâche -->
+   <div id="addTaskContainer" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-gray-800 rounded-xl w-full max-w-2xl mx-4 shadow-2xl">
+            <!-- En-tête -->
+            <div class="bg-violet-600 rounded-t-xl p-6 flex justify-between items-center">
+                <div>
+                    <h2 class="text-xl font-bold text-white">Ajouter une nouvelle tâche</h2>
+                    <p class="text-violet-100 mt-1">Remplissez les détails de votre tâche</p>
+                </div>
+                <button id="close-taskForm" class="text-white hover:text-gray-200 text-xl cursor-pointer transition-colors">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Formulaire -->
+            <form class="p-6 space-y-4" id="taskForm">
+                <!-- Titre -->
+                <div>
+                    <label for="taskTitle" class="block text-sm font-medium text-gray-300 mb-2">Titre *</label>
+                    <input type="text" id="taskTitle" name="taskTitle" 
+                           class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 transition-colors"
+                           placeholder="Que souhaitez-vous accomplir ?" required>
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <label for="taskDescription" class="block text-sm font-medium text-gray-300 mb-2">Description</label>
+                    <textarea id="taskDescription" name="taskDescription" rows="3"
+                              class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 transition-colors resize-none"
+                              placeholder="Décrivez votre tâche..."></textarea>
+                </div>
+
+                <!-- Date et Priorité -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="taskDate" class="block text-sm font-medium text-gray-300 mb-2">Date d'échéance</label>
+                        <input type="date" id="taskDate" name="taskDate"
+                               class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-violet-500 focus:ring-2 focus:ring-violet-500 transition-colors">
+                    </div>
+                    <div>
+                        <label for="taskPriority" class="block text-sm font-medium text-gray-300 mb-2">Priorité</label>
+                        <select id="taskPriority" name="taskPriority"
+                                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-violet-500 focus:ring-2 focus:ring-violet-500 transition-colors">
+                            <option value="">Sélectionnez une priorité</option>
+                            <option value="low">Basse</option>
+                            <option value="medium">Moyenne</option>
+                            <option value="high">Haute</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Catégorie -->
+                <div>
+                    <label for="taskCategory" class="block text-sm font-medium text-gray-300 mb-2">Catégorie</label>
+                    <div class="flex gap-2">
+                        <select id="taskCategory" name="taskCategory"
+                                class="flex-1 bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-violet-500 focus:ring-2 focus:ring-violet-500 transition-colors">
+                            <option value="">Sélectionnez une catégorie</option>
+                            <option value="work">Travail</option>
+                            <option value="personal">Personnel</option>
+                            <option value="shopping">Courses</option>
+                            <option value="health">Santé</option>
+                        </select>
+                        <button type="button" id="addCategoryBtn" class="bg-gray-600 hover:bg-gray-500 text-white px-4 rounded-lg transition-colors">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex justify-end gap-3 pt-4 border-t border-gray-600">
+                    <button type="button" id="cancelTaskBtn" class="px-6 py-2 text-gray-300 hover:text-white transition-colors">
+                        Annuler
+                    </button>
+                    <button type="submit" class="bg-violet-600 hover:bg-violet-700 text-white px-6 py-2 rounded-lg transition-colors font-medium">
+                        Créer la tâche
+                    </button>
+                </div>
+            </form>
+        </div>
+   </div>
+
    <script type="module" src="js/main.js"></script> 
 </body>
 </html>
