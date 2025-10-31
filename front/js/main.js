@@ -1,14 +1,17 @@
 // Modèle
 // // front/js/main.js
-import { loadData, } from "./api.js";
-import {convertToObject, displayTasks} from "./dom.js";
+import * as dom from "./dom.js";
+import * as api from "./api.js";
 
 async function init() {
     console.log("Initialisation ....");
-    const tasks = await loadData("tasks");
+    const tasks = await api.loadData("tasks");
 
     // Affichage dynamique des élements 
-    displayTasks(tasks);
+    dom.displayTasks(tasks);
+
+    // Gestion des évenements
+    dom.setupEventListeners();
 }
 
 document.addEventListener("DOMContentLoaded", init);

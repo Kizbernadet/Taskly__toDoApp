@@ -7,21 +7,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/output.css">
 </head>
-<body class="bg-gray-950 min-h-screen px-4 text-white overflow-x-hidden">
-   <main class="max-w-7xl mx-auto h-screen rounded-xl flex flex-col" id="mainContainer">
+<body class="min-h-screen px-4 overflow-x-hidden text-white bg-gray-950">
+   <main class="flex flex-col h-screen mx-auto max-w-7xl rounded-xl" id="mainContainer">
     <!-- Header -->
-    <header class="w-full py-2 mt-2 flex justify-between items-center">
-        <h1 class="font-special uppercase text-3xl font-normal cursor-pointer text-center text-violet-400 drop-shadow-lg">
-            <i class="fas fa-tasks mr-3"></i>Taskly
+    <header class="flex items-center justify-between w-full py-2 mt-2">
+        <h1 class="text-3xl font-normal text-center uppercase cursor-pointer font-special text-violet-400 drop-shadow-lg">
+            <i class="mr-3 fas fa-tasks"></i>Taskly
         </h1>
     </header>
 
     <!-- Main Content -->
-    <section class="flex flex-1 flex-col lg:flex-row gap-4 pb-2">
+    <section class="flex flex-col flex-1 gap-4 pb-2 lg:flex-row">
         <!-- Sidebar Filters -->
-        <aside class="hidden lg:w-1/5 bg-gray-800 rounded-xl p-6 shadow-lg">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-semibold flex items-center gap-2">
+        <aside class="hidden p-6 bg-gray-800 shadow-lg lg:w-1/5 rounded-xl">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="flex items-center gap-2 text-xl font-semibold">
                     <i class="fas fa-filter text-violet-400"></i>
                     Filtres
                 </h2>
@@ -32,9 +32,9 @@
             </div>
 
             <!-- Filtres détaillés -->
-            <div id="filtersContent" class="space-y-4 opacity-50 pointer-events-none transition-all duration-300">
+            <div id="filtersContent" class="space-y-4 transition-all duration-300 opacity-50 pointer-events-none">
                 <div class="filter-group">
-                    <h3 class="text-sm font-medium text-gray-300 mb-2">Statut</h3>
+                    <h3 class="mb-2 text-sm font-medium text-gray-300">Statut</h3>
                     <div class="space-y-2">
                         <label class="flex items-center gap-2 cursor-pointer">
                             <input type="checkbox" class="rounded text-violet-500 filter-checkbox" data-filter="all" checked> Toutes
@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="filter-group">
-                    <h3 class="text-sm font-medium text-gray-300 mb-2">Priorité</h3>
+                    <h3 class="mb-2 text-sm font-medium text-gray-300">Priorité</h3>
                     <div class="space-y-2">
                         <label class="flex items-center gap-2 cursor-pointer">
                             <input type="checkbox" class="rounded text-violet-500 priority-checkbox" data-priority="all" checked> Toutes
@@ -67,8 +67,8 @@
                 </div>
 
                 <div class="filter-group">
-                    <h3 class="text-sm font-medium text-gray-300 mb-2">Catégorie</h3>
-                    <select id="categoryFilter" class="w-full bg-gray-700 rounded-lg px-3 py-2 text-white border border-gray-600 focus:border-violet-500 focus:ring-1 focus:ring-violet-500">
+                    <h3 class="mb-2 text-sm font-medium text-gray-300">Catégorie</h3>
+                    <select id="categoryFilter" class="w-full px-3 py-2 text-white bg-gray-700 border border-gray-600 rounded-lg focus:border-violet-500 focus:ring-1 focus:ring-violet-500">
                         <option value="all">Toutes les catégories</option>
                         <option value="work">Travail</option>
                         <option value="personal">Personnel</option>
@@ -80,40 +80,40 @@
         </aside>
 
         <!-- Main Tasks Area -->
-        <div class="lg:flex-1 bg-gray-800 rounded-xl p-4 shadow-lg">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-semibold flex items-center gap-2">
+        <div class="p-4 bg-gray-800 shadow-lg lg:flex-1 rounded-xl">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="flex items-center gap-2 text-2xl font-semibold">
                     <i class="fas fa-clipboard-list text-violet-400"></i>
                     Mes Tâches
                 </h2>
-                <button id="addNewTask" class="bg-violet-600 hover:bg-violet-700 text-white px-6 py-3 rounded-lg cursor-pointer flex items-center gap-2 transition-all duration-300 hover:scale-105 font-medium">
+                <button id="addNewTask" class="flex items-center gap-2 px-6 py-3 font-medium text-white transition-all duration-300 rounded-lg cursor-pointer bg-violet-600 hover:bg-violet-700 hover:scale-105">
                     <i class="fas fa-plus"></i>
                     Nouvelle tâche
                 </button>
             </div>
 
             <!-- Stats -->
-            <div class="flex justify-evenly items-center gap-4 mb-2 w-full h-max">
-                <div class="bg-gray-700 rounded-lg p-2 w-30 text-center">
+            <div class="flex items-center w-full gap-4 mb-2 justify-evenly h-max">
+                <div class="p-2 text-center bg-gray-700 rounded-lg w-30">
                     <div id="totalTasks" class="text-2xl font-bold text-violet-400">0</div>
                     <div class="text-sm text-gray-300">Total</div>
                 </div>
-                <div class="bg-gray-700 rounded-lg p-2 w-30 text-center">
+                <div class="p-2 text-center bg-gray-700 rounded-lg w-30">
                     <div id="pendingTasks" class="text-2xl font-bold text-yellow-400">0</div>
                     <div class="text-sm text-gray-300">En cours</div>
                 </div>
-                <div class="bg-gray-700 rounded-lg p-2 w-30 text-center">
+                <div class="p-2 text-center bg-gray-700 rounded-lg w-30">
                     <div id="completedTasks" class="text-2xl font-bold text-green-400">0</div>
                     <div class="text-sm text-gray-300">Terminées</div>
                 </div>
             </div>
 
             <!-- Tasks List -->
-            <div class="rounded-lg p-4 h-96 overflow-y-auto">
+            <div class="p-4 overflow-y-auto rounded-lg h-96">
                 <ul id="taskContainer" class="space-y-3">
                     <!-- Les tâches seront ajoutées dynamiquement ici -->
-                    <li class="task-placeholder text-gray-400 text-center py-8">
-                        <i class="fas fa-clipboard text-4xl mb-2"></i>
+                    <li class="py-8 text-center text-gray-400 task-placeholder">
+                        <i class="mb-2 text-4xl fas fa-clipboard"></i>
                         <p>Aucune tâche pour le moment</p>
                         <p class="text-sm">Cliquez sur "Nouvelle tâche" pour commencer</p>
                     </li>
@@ -124,48 +124,48 @@
    </main>
 
    <!-- Modal d'ajout de tâche -->
-   <div id="addTaskContainer" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
-        <div class="bg-gray-800 rounded-xl w-full max-w-2xl mx-4 shadow-2xl">
+   <div id="addTaskContainer" class="fixed inset-0 z-50 flex items-center justify-center w-screen h-screen p-4 overlay">
+        <div class="mx-4 bg-gray-600 shadow-2xl max-w-1xl rounded-xl">
             <!-- En-tête -->
-            <div class="bg-violet-600 rounded-t-xl p-6 flex justify-between items-center">
+            <!-- <div class="flex items-center justify-between p-6 bg-violet-600 rounded-t-xl">
                 <div>
                     <h2 class="text-xl font-bold text-white">Ajouter une nouvelle tâche</h2>
-                    <p class="text-violet-100 mt-1">Remplissez les détails de votre tâche</p>
+                    <p class="mt-1 text-violet-100">Remplissez les détails de votre tâche</p>
                 </div>
-                <button id="close-taskForm" class="text-white hover:text-gray-200 text-xl cursor-pointer transition-colors">
-                    <i class="fas fa-times text-2xl"></i>
+                <button id="close-taskForm" class="text-xl text-white transition-colors cursor-pointer hover:text-gray-200">
+                    <i class="text-2xl fas fa-times"></i>
                 </button>
-            </div>
+            </div> -->
 
             <!-- Formulaire -->
             <form class="p-6 space-y-4" id="taskForm">
                 <!-- Titre -->
                 <div>
-                    <label for="taskTitle" class="block text-sm font-medium text-gray-300 mb-2">Titre *</label>
+                    <label for="taskTitle" class="block mb-2 text-sm font-medium text-gray-300">Titre *</label>
                     <input type="text" id="taskTitle" name="taskTitle" 
-                           class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 transition-colors"
+                           class="w-full px-4 py-3 text-white placeholder-gray-400 transition-colors bg-gray-700 border border-gray-600 rounded-lg focus:border-violet-500 focus:ring-2 focus:ring-violet-500"
                            placeholder="Que souhaitez-vous accomplir ?" required>
                 </div>
 
                 <!-- Description -->
                 <div>
-                    <label for="taskDescription" class="block text-sm font-medium text-gray-300 mb-2">Description</label>
+                    <label for="taskDescription" class="block mb-2 text-sm font-medium text-gray-300">Description</label>
                     <textarea id="taskDescription" name="taskDescription" rows="3"
-                              class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 transition-colors resize-none"
+                              class="w-full px-4 py-3 text-white placeholder-gray-400 transition-colors bg-gray-700 border border-gray-600 rounded-lg resize-none focus:border-violet-500 focus:ring-2 focus:ring-violet-500"
                               placeholder="Décrivez votre tâche..."></textarea>
                 </div>
 
                 <!-- Date et Priorité -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div>
-                        <label for="taskDate" class="block text-sm font-medium text-gray-300 mb-2">Date d'échéance</label>
+                        <label for="taskDate" class="block mb-2 text-sm font-medium text-gray-300">Date d'échéance</label>
                         <input type="date" id="taskDate" name="taskDate"
-                               class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-violet-500 focus:ring-2 focus:ring-violet-500 transition-colors">
+                               class="w-full px-4 py-3 text-white transition-colors bg-gray-700 border border-gray-600 rounded-lg focus:border-violet-500 focus:ring-2 focus:ring-violet-500">
                     </div>
                     <div>
-                        <label for="taskPriority" class="block text-sm font-medium text-gray-300 mb-2">Priorité</label>
+                        <label for="taskPriority" class="block px-2 mb-2 text-sm font-medium text-gray-300">Priorité</label>
                         <select id="taskPriority" name="taskPriority"
-                                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-violet-500 focus:ring-2 focus:ring-violet-500 transition-colors">
+                                class="w-full px-4 py-3 text-white transition-colors bg-gray-700 border border-gray-600 rounded-lg focus:border-violet-500 focus:ring-2 focus:ring-violet-500">
                             <option value="">Sélectionnez une priorité</option>
                             <option value="low">Basse</option>
                             <option value="medium">Moyenne</option>
@@ -176,28 +176,28 @@
 
                 <!-- Catégorie -->
                 <div>
-                    <label for="taskCategory" class="block text-sm font-medium text-gray-300 mb-2">Catégorie</label>
+                    <label for="taskCategory" class="block mb-2 text-sm font-medium text-gray-300">Catégorie</label>
                     <div class="flex gap-2">
                         <select id="taskCategory" name="taskCategory"
-                                class="flex-1 bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-violet-500 focus:ring-2 focus:ring-violet-500 transition-colors">
+                                class="flex-1 px-4 py-3 text-white transition-colors bg-gray-700 border border-gray-600 rounded-lg focus:border-violet-500 focus:ring-2 focus:ring-violet-500">
                             <option value="">Sélectionnez une catégorie</option>
                             <option value="work">Travail</option>
                             <option value="personal">Personnel</option>
                             <option value="shopping">Courses</option>
                             <option value="health">Santé</option>
                         </select>
-                        <button type="button" id="addCategoryBtn" class="bg-gray-600 hover:bg-gray-500 text-white px-4 rounded-lg transition-colors">
+                        <button type="button" id="addCategoryBtn" class="px-4 text-white transition-colors bg-gray-600 rounded-lg hover:bg-gray-500">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
                 </div>
 
                 <!-- Actions -->
-                <div class="flex justify-end gap-3 pt-4 border-t border-gray-600">
-                    <button type="button" id="cancelTaskBtn" class="px-6 py-2 text-gray-300 hover:text-white transition-colors">
+                <div class="flex justify-end gap-3 pt-4 border-t-2 border-gray-900">
+                    <button type="button" id="cancelTaskBtn" class="px-6 py-2 text-gray-300 transition-colors bg-red-500 rounded-lg cursor-pointer hover:text-white hover:bg-red-700">
                         Annuler
                     </button>
-                    <button type="submit" class="bg-violet-600 hover:bg-violet-700 text-white px-6 py-2 rounded-lg transition-colors font-medium">
+                    <button type="submit" class="px-6 py-2 font-medium text-white transition-all duration-300 rounded-lg cursor-pointer bg-violet-600 hover:bg-violet-700 hover:border-amber-400">
                         Créer la tâche
                     </button>
                 </div>

@@ -84,7 +84,7 @@
     /* === Styles liés aux tâches (liste, item, priorités) === */
     .task__style__li{
         @apply flex items-center justify-between w-full h-16 px-2 bg-gray-600 rounded-lg;
-        @apply transition-all duration-300 border-l-4 cursor-pointer hover:bg-violet-700;
+        @apply transition-all duration-300 border-l-4 cursor-pointer hover:bg-gray-700;
         border-left-color: #6b7280; /* default accent */
     }
 
@@ -109,11 +109,30 @@
     /* Actions (édition / suppression) */
     .task__style__actions{ @apply flex items-center justify-end gap-2; }
     .task__style__button{ @apply w-8 h-8 transition-all duration-300 ease-in-out border-none hover:scale-120; }
-    .task__style__button.edit { @apply hover:bg-blue-600; }
-    .task__style__button.delete { @apply hover:bg-red-600; }
+    /* .task__style__button.edit { @apply hover:bg-blue-600; }
+    .task__style__button.delete { @apply hover:bg-red-600; } */
 
-    .task__style__icon{ @apply transition-all duration-200 ease-in-out; }
-    .icon__style__commun{ @apply w-4 h-4; }
+    /* règle générale pour icônes */
+    .task__style__icon {
+    transition: transform 0.2s ease, color 0.2s ease;
+    transform-origin: center;
+    }
+
+    /* effet sur le bouton parent : rotate l'icône */
+    .task__style__button:hover .task__style__icon {
+        transform: scale(1.05);
+    }
+
+    /* cas où tu veux un badge qui change de couleur au hover */
+    .task__style__button.edit:hover {
+        @apply text-green-600 cursor-pointer;
+    }
+    .task__style__button.delete:hover {
+        @apply text-red-600 cursor-pointer;
+    }
+
+    /* .task__style__icon{ @apply transition-all duration-200 ease-in-out; }
+    .icon__style__commun{ @apply w-4 h-4; } */
 
     /* Meta (date, catégorie, badge) */
     .task-meta { @apply flex items-center gap-4 text-sm text-gray-300; }
@@ -146,6 +165,11 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+    }
+
+    .overlay{
+        backdrop-filter: blur(8px);
+        background-color: rgba(0, 0, 0, 0.4);
     }
 }
 
